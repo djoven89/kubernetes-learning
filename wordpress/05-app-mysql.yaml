@@ -1,0 +1,140 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-configmap
+  namespace: cliente1-app
+  labels:
+    app: wordpress
+    tier: mysql
+    version: 1.0.0
+data:
+  db_host: mysql-service
+  db_port: "3306"
+  db_name: db_app
+  db_user: dba_app
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name:  mysql-secret
+  namespace: cliente1-app
+  labels:
+    app: wordpress
+    tier: mysql
+    version: 1.0.0
+data:
+   db_root_password: cm9vdA==
+   db_password: ZGJh
+type: Opaque
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name:  mysql-service
+  namespace: cliente1-app
+  labels:
+    app: wordpress
+    tier: mysql
+    version: 1.0.0
+spec:
+  selector:
+    tier: mysql
+  type:  ClusterIP
+  ports:
+  - name: mysql-port
+    port: 3306
+    targetPort: 3306
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pvc
+  namespace: cliente1-app
+  labels:
+    app: wordpress
+    tier: mysql
+    version: 1.0.0
+spec:
+  accessModes:
+    - ReadWriteOnce
+  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 500Mi
+  storageClassName: nfs-mysql
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  mysql-deployment
+  namespace: cliente1-app
+  labels:
+    app: wordpress
+    tier: mysql
+    version: 1.0.0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      version: 1.0.0
+  template:
+    metadata:
+      labels:
+        app: wordpress
+        tier: mysql
+        version: 1.0.0
+    spec:
+      containers:
+      - image: mysql:8
+        name: mysql
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort:  3306
+          name:  mysql-port
+        env:
+        - name: MYSQL_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: mysql-configmap
+              key: db_host
+        - name: MYSQL_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: mysql-configmap
+              key: db_port
+        - name: MYSQL_DATABASE
+          valueFrom:
+            configMapKeyRef:
+              name: mysql-configmap
+              key: db_name
+        - name: MYSQL_USER
+          valueFrom:
+            configMapKeyRef:
+              name: mysql-configmap
+              key: db_user
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: db_password
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: db_root_password
+        volumeMounts:
+        - mountPath: "/var/lib/mysql/"
+          name: pvc-volume
+        resources:
+          requests:
+            cpu: "0.2"
+            memory: "400Mi"
+      volumes:
+        - name: pvc-volume
+          persistentVolumeClaim:
+            claimName: mysql-pvc

@@ -1,0 +1,65 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: cliente1-app
+  labels:
+    customer: cliente1
+    app: wordpress
+  annotations:
+    customerName: Daniel
+    customerEmail: daniel@app.lan
+
+---
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: cliente1-quota
+  namespace: cliente1-app
+  labels:
+    customer: cliente1
+    app: wordpress
+spec:
+  hard:
+    pods: "6"
+    replicationcontrollers: "2"
+    services: "6"
+    secrets: "18"
+    configmaps: "18"
+    persistentvolumeclaims: "4"
+    limits.cpu: "1500m"
+    limits.memory: 2Gi
+    requests.cpu: "1000m"
+    requests.memory: 1Gi
+    requests.storage: 2Gi
+
+---
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: limitrange-cliente1-app
+  namespace: cliente1-app
+spec:
+  limits:
+  - default: ## Default Limit
+      cpu: "0.5"
+      memory: 500Mi
+    defaultRequest: ## Default Request
+      cpu: "0.1"
+      memory: 150Mi
+    max:  ## Max
+      cpu: "0.5"
+      memory: 500Mi
+    min:  ## Min
+      cpu: "0.1"
+      memory: 150Mi
+    type: Container
+  - default:  ## Default Limit
+      storage: 2Gi
+    defaultRequest:  ## Default Request
+      storage: 100Mi
+    max:  ## Max
+      storage: 2Gi
+    min:  ## Min
+      storage: 100Mi
+    type: PersistentVolumeClaim

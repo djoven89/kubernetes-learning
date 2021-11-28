@@ -1,0 +1,110 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: phpmyadmin-service
+  namespace: cliente1-app
+  labels:
+    app: wordpress
+    tier: phpmyadmin
+    version: 1.0.0
+spec:
+  selector:
+    app: wordpress
+    tier: phpmyadmin
+    version: 1.0.0
+  type: ClusterIP
+  ports:
+  - name: phpmyadmin-port
+    port: 80
+    targetPort: 80
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  phpmyadmin-deployment
+  namespace: cliente1-app
+  labels:
+    app: wordpress
+    tier: phpmyadmin
+    version: 1.0.0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wordpress
+      tier: phpmyadmin
+      version: 1.0.0
+  template:
+    metadata:
+      labels:
+        app: wordpress
+        tier: phpmyadmin
+        version: 1.0.0
+    spec:
+      containers:
+      - image: phpmyadmin:5.1.1-apache
+        imagePullPolicy: IfNotPresent
+        name: phpmyadmin
+        env:
+        - name: PMA_ARBITRARY
+          value: "1"
+        - name: PMA_VERBOSE
+          value: "1"
+        - name: PMA_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: mysql-configmap
+              key: db_host
+        - name: PMA_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: mysql-configmap
+              key: db_port
+        ports:
+        - containerPort: 80
+          name: phpmyadmin-port
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: phpmyadmin-ingress
+  namespace: cliente1-app
+  labels:
+    app: wordpress
+    tier: phpmyadmin
+    version: 1.0.0
+spec:
+  rules:
+  - host: "phpmyadmin.app.lan"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: phpmyadmin-service
+            port:
+              number: 80
+  - host: "phpmyadmin.app.lan.192.168.100.11.nip.io"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: phpmyadmin-service
+            port:
+              number: 80
+  - host: "phpmyadmin.app.lan.192.168.100.12.nip.io"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: phpmyadmin-service
+            port:
+              number: 80

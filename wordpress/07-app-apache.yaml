@@ -1,0 +1,146 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: apache-service
+  namespace: cliente1-app
+  labels:
+    app: wordpress
+    tier: apache
+    version: 1.0.0
+spec:
+  selector:
+    app: wordpress
+    tier: apache
+    version: 1.0.0
+  type: NodePort
+  ports:
+  - name: apache-port
+    port: 80
+    targetPort: 80
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: apache-pvc
+  namespace: cliente1-app
+  labels:
+    app: wordpress
+    tier: apache
+    version: 1.0.0
+spec:
+  accessModes:
+    - ReadWriteOnce
+  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: nfs-apache
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  apache-deployment
+  namespace: cliente1-app
+  labels:
+    app: wordpress
+    tier: apache
+    version: 1.0.0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wordpress
+      tier: apache
+      version: 1.0.0
+  template:
+    metadata:
+      labels:
+        app: wordpress
+        tier: apache
+        version: 1.0.0
+    spec:
+      containers:
+      - image: wordpress:php7.4-apache
+        imagePullPolicy: IfNotPresent
+        name: apache
+        env:
+        - name: WORDPRESS_DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: mysql-configmap
+              key: db_host
+        - name: WORDPRESS_DB_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: mysql-configmap
+              key: db_name
+        - name: WORDPRESS_DB_USER
+          valueFrom:
+            configMapKeyRef:
+              name: mysql-configmap
+              key: db_user
+        - name: WORDPRESS_DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: db_password
+        ports:
+        - containerPort: 80
+          name: apache-port
+        volumeMounts:
+        - mountPath: "/var/www/html/"
+          name: pvc-volume
+        resources:
+          requests:
+            cpu: "0.5"
+            memory: "400Mi"
+      volumes:
+        - name: pvc-volume
+          persistentVolumeClaim:
+            claimName: apache-pvc
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: apache-ingress
+  namespace: cliente1-app
+  labels:
+    app: wordpress
+    tier: apache
+    version: 1.0.0
+spec:
+  rules:
+  - host: "app.lan"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: apache-service
+            port:
+              number: 80
+  - host: "app.lan.192.168.100.11.nip.io"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: apache-service
+            port:
+              number: 80
+  - host: "app.lan.192.168.100.12.nip.io"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: apache-service
+            port:
+              number: 80

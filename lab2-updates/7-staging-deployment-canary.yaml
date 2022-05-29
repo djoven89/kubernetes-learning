@@ -1,0 +1,40 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cliente2-staging-deployment-canary
+  namespace: cliente2-staging-ns
+  labels:
+    customer: cliente2
+    app: flask
+    env: staging
+    track: canary
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      customer: cliente2
+      app: flask
+      env: staging
+      track: canary
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        customer: cliente2
+        app: flask
+        env: staging
+        track: canary
+    spec:
+      containers:
+      - name: client2-staging-web-canary
+        image: djoven89/app-lab2:1.0.1
+        ports:
+        - containerPort: 80
+          name: web-port
+        imagePullPolicy: IfNotPresent
+      restartPolicy: Always

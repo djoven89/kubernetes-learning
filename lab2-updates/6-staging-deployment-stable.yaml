@@ -1,0 +1,39 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cliente2-staging-deployment
+  namespace: cliente2-staging-ns
+  labels:
+    customer: cliente2
+    app: flask
+    env: staging
+spec:
+  replicas: 6
+  selector:
+    matchLabels:
+      customer: cliente2
+      app: flask
+      env: staging
+      track: stable
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        customer: cliente2
+        app: flask
+        env: staging
+        track: stable
+    spec:
+      containers:
+      - name: client2-staging-web
+        image: djoven89/app-lab2:1.0.0
+        ports:
+        - containerPort: 80
+          name: web-port
+        imagePullPolicy: IfNotPresent
+      restartPolicy: Always

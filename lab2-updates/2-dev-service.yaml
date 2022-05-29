@@ -1,0 +1,21 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: cliente2-dev-service
+  namespace: cliente2-dev-ns
+  labels:
+    customer: cliente2
+    app: flask
+    env: dev
+spec:
+  selector:
+    customer: cliente2
+    app: flask
+    env: dev
+  type:  NodePort
+  ports:
+  - name: cliente2-dev-web-port
+    port: 8080
+    targetPort: 8080
+    nodePort: 32020

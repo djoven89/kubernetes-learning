@@ -1,0 +1,65 @@
+## https://kubernetes.io/docs/tasks/administer-cluster/namespaces/#creating-a-new-namespace
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: cliente2-staging-ns
+  labels:
+    customer: client22
+    app: flask
+    env: staging
+  annotations:
+    customerName: Daniel
+    customerEmail: daniel@staging.app2.lan
+
+## https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/quota-memory-cpu-namespace/
+---
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: cliente2-staging-quota
+  namespace: cliente2-staging-ns
+  labels:
+    customer: cliente2
+    app: flask
+    env: staging
+spec:
+  hard:
+    pods: "8"
+    replicationcontrollers: "2"
+    services: "2"
+    secrets: "6"
+    configmaps: "6"
+    persistentvolumeclaims: "0"
+    limits.cpu: "1.5"
+    requests.cpu: "1"
+    limits.memory: 2Gi
+    requests.memory: "1.5Gi"
+
+## https://kubernetes.io/docs/concepts/policy/limit-range/#what-s-next
+---
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: cliente2-staging-limitrange
+  namespace: cliente2-staging-ns
+  labels:
+    customer: cliente2
+    app: flask
+    env: staging
+spec:
+  limits:
+  - default: ## Default Limit
+      cpu: "200m"
+      memory: 250Mi
+    defaultRequest: ## Default Request
+      cpu: "100m"
+      memory: 150Mi
+    max: ## Max Limit
+      cpu: "200m"
+      memory: 250Mi
+    min: ## Min Limit
+      cpu: "100m"
+      memory: 150Mi
+    type: Container
+

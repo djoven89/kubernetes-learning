@@ -1,0 +1,64 @@
+## https://kubernetes.io/docs/tasks/administer-cluster/namespaces/#creating-a-new-namespace
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: cliente2-prod-ns
+  labels:
+    customer: client22
+    app: flask
+    env: prod
+  annotations:
+    customerName: Daniel
+    customerEmail: daniel@prod.app2.lan
+
+## https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/quota-memory-cpu-namespace/
+---
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: cliente2-prod-quota
+  namespace: cliente2-prod-ns
+  labels:
+    customer: cliente2
+    app: flask
+    env: prod
+spec:
+  hard:
+    pods: "12"
+    replicationcontrollers: "2"
+    services: "2"
+    secrets: "10"
+    configmaps: "10"
+    persistentvolumeclaims: "0"
+    limits.cpu: "2"
+    requests.cpu: "2000m"
+    limits.memory: 2Gi
+    requests.memory: "2Gi"
+
+## https://kubernetes.io/docs/concepts/policy/limit-range/#what-s-next
+---
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: cliente2-prod-limitrange
+  namespace: cliente2-prod-ns
+  labels:
+    customer: cliente2
+    app: flask
+    env: prod
+spec:
+  limits:
+  - default: ## Default Limit
+      cpu: "100m"
+      memory: 150Mi
+    defaultRequest: ## Default Request
+      cpu: "100m"
+      memory: 150Mi
+    max: ## Max Limit
+      cpu: "1000m"
+      memory: 750Mi
+    min: ## Min Limit
+      cpu: "100m"
+      memory: 150Mi
+    type: Container

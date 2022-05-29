@@ -1,0 +1,40 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cliente2-prod-deployment-01
+  namespace: cliente2-prod-ns
+  labels:
+    customer: cliente2
+    app: flask
+    env: prod
+    version: 1.0.0
+spec:
+  replicas: 6
+  selector:
+    matchLabels:
+      customer: cliente2
+      app: flask
+      env: prod
+      version: 1.0.0
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        customer: cliente2
+        app: flask
+        env: prod
+        version: 1.0.0
+    spec:
+      containers:
+      - name: client2-prod-web
+        image: djoven89/app-lab2:1.0.0
+        ports:
+        - containerPort: 8080
+          name: web-port
+        imagePullPolicy: IfNotPresent
+      restartPolicy: Always

@@ -1,0 +1,21 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: cliente2-staging-service
+  namespace: cliente2-staging-ns
+  labels:
+    customer: cliente2
+    app: flask
+    env: staging
+spec:
+  selector:
+    customer: cliente2
+    app: flask
+    env: staging
+  type:  NodePort
+  ports:
+  - name: cliente2-staging-web-port
+    port: 8080
+    targetPort: 8080
+    nodePort: 32021

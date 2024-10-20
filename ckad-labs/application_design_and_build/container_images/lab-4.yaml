@@ -1,0 +1,7 @@
+# Añade una etiqueta adicional al pod; env=testing.
+
+###
+# CLI
+###
+
+# kubectl label pod webserver env=testing

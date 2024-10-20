@@ -1,0 +1,7 @@
+# Elimina el pod a través de la etiqueta type=webserver
+
+###
+# CLI
+###
+
+# kubectl delete pod -l type=webserver

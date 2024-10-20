@@ -1,0 +1,24 @@
+# Crea un Persistent Volume Claim llamado pvc-hostpath para el volumen pv-hostpath.
+
+###
+# CLI
+###
+
+# kubectl get pv,pvc -o wide
+# kubectl describe pvc pvc-hostpath
+
+###
+# YAML
+###
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-hostpath
+spec:
+  storageClassName: pv-hostpath
+  accessModes:
+    - ReadOnlyMany
+  resources:
+    requests:
+      storage: 5M

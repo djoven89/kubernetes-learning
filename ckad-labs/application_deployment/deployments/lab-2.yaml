@@ -1,0 +1,8 @@
+# Añade una anotación al deployment para que pueda hacerse un rollback con información.
+
+###
+# CLI
+###
+
+# kubectl annotate deployments.apps deployment-website kubernetes.io/change-cause="image learnk8s/app:1.0.0"
+# kubectl rollout history deployment deployment-website

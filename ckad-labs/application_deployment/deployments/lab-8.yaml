@@ -1,0 +1,8 @@
+# Actualiza las imágenes del deployment por: learnk8s/app:3.0.0 y alpine/curl:8.9.1 sin usar kubectl apply.
+
+###
+# CLI
+###
+
+# kubectl set image deployments deployment-website cli=alpine/curl:8.9.1 app=learnk8s/app:3.0.0
+# kubectl get pods -o wide

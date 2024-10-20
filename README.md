@@ -27,7 +27,6 @@ Además, se ha configurado el cluster con:
 
 Más información en: `lab1-wordpress/README.md`.
 
-
 ## Laboratorio 2 - Actualizaciones
 
 En el directorio `lab2-updates` se ha creado un laboratorio completo cuya finalidad es aprender las tres metodologías de actualización más comúnes usadas en Kubernetes para actualizar aplicaciones.
@@ -45,3 +44,7 @@ Se han usado los siguientes objetos:
 * (prod) Blue gree deployment.
 
 Más información en: `lab2-updates/README.md`.
+
+## CKAD
+
+En el directorio `ckad-labs/README.md` se han creados laboratorios para cada uno de los objetivos que conforman la certificación.

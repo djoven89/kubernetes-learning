@@ -1,0 +1,50 @@
+# Crea un deployment con los siguientes requisitos:
+#   Nombre: deployment-storage-hostpath
+#   Réplicas: 3
+#   Imagens: httpd:latest
+#   Nombre del volumen persistente: pvc-hostpath
+#   Punto de montaje del volumen persistente: /usr/local/apache2/htdocs/
+#   Nodo: principal
+
+###
+# CLI
+###
+
+# kubectl get nodes
+# kubectl describe nodes minikube
+# kubectl create deployment deployment-storage-hostpath --image httpd:latest --replicas 3 --dry-run -o yaml
+# kubectl get deployments,pods,pvc -o wide
+
+###
+# YAML
+###
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: deployment-storage-hostpath
+  name: deployment-storage-hostpath
+spec:
+  selector:
+    matchLabels:
+      app: deployment-storage-hostpath
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: deployment-storage-hostpath
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: minikube
+      volumes:
+        - name: volumen-website
+          persistentVolumeClaim:
+            claimName: pvc-hostpath
+      containers:
+      - image: httpd:latest
+        name: httpd
+        volumeMounts:
+        - mountPath: "/usr/local/apache2/htdocs"
+          name: volumen-website
+        resources: {}

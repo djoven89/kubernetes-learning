@@ -1,0 +1,32 @@
+# Crea un pod con los siguientes requisitos:
+#   Etiqueta: type=webserver
+#   Nombre: webserver
+#     Imagen: nginx:latest
+#   Nombre: cli
+#     Etiquetas: type=cli
+#     Imagen: alpine/curl
+#     Comando: tail -f /dev/null
+
+###
+# CLI
+###
+
+# kubectl run webserver --image=nginx:latest -l type=webserver --dry-run -o yaml
+
+###
+# YAML
+###
+
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    type: webserver
+  name: webserver
+spec:
+  containers:
+  - image: nginx:latest
+    name: webserver
+  - image: alpine/curl
+    name: cli
+    command: [ "tail", "-f", "/dev/null" ]

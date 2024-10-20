@@ -1,0 +1,11 @@
+# Restaura la primera revisión del deployment.
+
+###
+# CLI
+###
+
+# kubectl rollout history deployment deployment-website
+# kubectl rollout undo deployment deployment-website --to-revision=1
+# kubectl rollout status deployment deployment-website
+# kubectl rollout history deployment deployment-website
+# kubectl describe pod deployment-website-7748ccf6b7-8m2qn | grep -i image:

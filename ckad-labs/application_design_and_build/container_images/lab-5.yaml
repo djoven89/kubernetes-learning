@@ -1,0 +1,7 @@
+# Añade la anotación; description='Simple web server'
+
+###
+# CLI
+###
+
+# kubectl annotate pod webserver description='Simple web server'

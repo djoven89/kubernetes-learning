@@ -1,0 +1,41 @@
+# Crea un pod con un probe de tipo startup los siguientes requisitos:
+#   Nombre: db-02
+#   Imagen: mysql:8.0
+#   Variable de entorno: MYSQL_ROOT_PASSWORD=ckad-2024
+#   Tipo de liveness: TCP
+#   Socket: 3306
+#   Tiempo antes del primer check: 30
+#   Periocidad del los checks: 10
+
+###
+# CLI
+###
+
+# kubectl run db02 --image=mysql:8.0 --env=MYSQL_ROOT_PASSWORD=ckad-2024 --dry-run -o yaml
+# kubectl explain pod --recursive
+# kubectl logs -f pods/db02
+
+###
+# YAML
+###
+
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: db02
+  name: db02
+spec:
+  containers:
+  - image: mysql:8.0
+    name: db02
+    resources: {}
+    env:
+      - name: MYSQL_ROOT_PASSWORD
+        value: 'ckad-2024'
+    startupProbe:
+      tcpSocket:
+        port: 3306
+      initialDelaySeconds: 30
+      periodSeconds: 10
+  restartPolicy: Always

@@ -1,0 +1,7 @@
+# Modifica la etiqueta software=nginx por software=httpd
+
+###
+# CLI
+###
+
+# kubectl label --overwrite pod webserver software=httpd

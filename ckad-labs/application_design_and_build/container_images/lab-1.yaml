@@ -1,0 +1,34 @@
+# Crea un pod con los siguientes requisitos:
+#   Nombre: webserver
+#   Etiquetas: type=webserver, software=nginx
+#   Imagen: nginx:latest
+#   Política de restart: OnFailure
+#   Variables de entorno: CERT=CKAD, YEAR=2024
+
+###
+# CLI
+###
+
+# kubectl run webserver --labels="type=webserver,software=nginx" --image=nginx:latest --restart=OnFailure --env="CERT=CKAD" --env="YEAR=2024"
+
+###
+# YAML
+###
+
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    type: webserver
+  name: webserver
+spec:
+  containers:
+  - env:
+    - name: CERT
+      value: CKAD
+    - name: YEAR
+      value: "2024"
+    image: nginx:latest
+    name: webserver
+  dnsPolicy: ClusterFirst
+  restartPolicy: OnFailure

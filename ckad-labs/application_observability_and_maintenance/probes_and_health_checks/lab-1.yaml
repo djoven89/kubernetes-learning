@@ -1,0 +1,44 @@
+# Crea un pod con un probe de tipo liveness con los siguientes requisitos:
+#   Nombre: website
+#   Imagen: nginx:latest
+#   Tipo de liveness: HTTP
+#   Ruta: /
+#   Puerto: 8080
+#   Tiempo antes del primer check: 15
+#   Timeout: 10
+#   Periocidad del los checks: 15
+#   Umbral de fallos: 3
+#   Política de restart: Always
+
+###
+# CLI
+###
+
+# kubectl run website --image=nginx:latest --port 8080 --dry-run -o yaml
+# kubectl explain pod --recursive
+# kubectl logs -f pods/website
+
+###
+# YAML
+###
+
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: website
+  name: website
+spec:
+  containers:
+  - image: nginx:latest
+    name: website
+    resources: {}
+    livenessProbe:
+      httpGet:
+        path: /
+        port: 80
+      initialDelaySeconds: 15
+      timeoutSeconds: 10
+      periodSeconds: 15
+      failureThreshold: 3
+  restartPolicy: Always

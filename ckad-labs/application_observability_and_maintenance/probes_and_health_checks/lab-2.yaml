@@ -1,0 +1,47 @@
+# Crea un pod con un probe de tipo readiness los siguientes requisitos:
+#   Nombre: db-01
+#   Imagen: mysql:8.0
+#   Variable de entorno: MYSQL_ROOT_PASSWORD=ckad-2024
+#   Tipo de liveness: Exec
+#   Comando: mysqladmin ping
+#   Tiempo antes del primer check: 20
+#   Timeout: 10
+#   Periocidad del los checks: 15
+#   Umbral de fallos: 3
+
+###
+# CLI
+###
+
+# kubectl run db01 --image=mysql:8.0 --env=MYSQL_ROOT_PASSWORD=ckad-2024 --dry-run -o yaml
+# kubectl explain pod --recursive
+# kubectl logs -f pods/db01
+
+###
+# YAML
+###
+
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: db01
+  name: db01
+spec:
+  containers:
+  - image: mysql:8.0
+    name: db01
+    resources: {}
+    env:
+      - name: MYSQL_ROOT_PASSWORD
+        value: 'ckad-2024'
+    readinessProbe:
+      exec:
+        command:
+        - mysqladmin
+        - ping
+      initialDelaySeconds: 20
+      timeoutSeconds: 10
+      periodSeconds: 15
+      failureThreshold: 3
+  restartPolicy: Always

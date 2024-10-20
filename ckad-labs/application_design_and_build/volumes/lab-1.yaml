@@ -1,0 +1,37 @@
+# Crea un volumen persistente con los siguientes requisitos en el nodo principal:
+#   Nombre: pv-hostpath
+#   Tipo: hostPath
+#   Capacidad: 5M
+#   Modo de acceso: ReadOnlyMany
+#   Etiqueta: env=testing
+#   Archivo dentro del volumen: index.html
+#   Contenido del archivo: <h1>Versión 1.0.0 del Volumen Persistente de tipo hostPath</h1>
+
+###
+# CLI
+###
+
+# minikube ssh
+# mkdir -vm0755 /tmp/pv-hostpath
+# echo '<h1>Versión 1.0.0 del Volumen Persistente de tipo hostPath</h1>' > /tmp/pv-hostpath/index.html
+# kubectl get pv -o wide
+# kubectl describe pv pv-hostpath
+
+###
+# YAML
+###
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-hostpath
+  labels:
+    env: testing
+spec:
+  storageClassName: pv-hostpath
+  capacity:
+    storage: 5M
+  accessModes:
+    - ReadOnlyMany
+  hostPath:
+    path: "/tmp/pv-hostpath"

@@ -1,0 +1,10 @@
+# Actualiza la imagen del deployment por learnk8s/app:2.0.0 y añade otra anotación.
+
+###
+# CLI
+###
+
+# kubectl set image deployments deployment-website app=learnk8s/app:2.0.0
+# kubectl annotate deployments.apps deployment-website kubernetes.io/change-cause="image learnk8s/app:2.0.0"
+# kubectl rollout history deployment deployment-website
+# kubectl describe pod deployment-website-786597d784-ff2hc | grep -i image:

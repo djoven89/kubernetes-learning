@@ -1,0 +1,12 @@
+# Crea un deployment con los siguientes requisitos:
+#   Nombre: deployment-website
+#   Réplicas: 3
+#   Puerto a exponer: 8080
+#   Imagens: learnk8s/app:1.0.0
+
+###
+# CLI
+###
+
+# kubectl create deployment deployment-website --port 8080 --image=learnk8s/app:1.0.0 --replicas 3
+# kubectl get deployments,pods

@@ -1,0 +1,7 @@
+# Ejecuta una consulta HTTP al contenedor webserver desde cli mediante curl.
+
+###
+# CLI
+###
+
+# kubectl exec -ti webserver -c cli -- curl http://localhost

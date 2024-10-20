@@ -1,0 +1,7 @@
+# Ejecuta el comando curl -s http://localhost en el pod sin acceder a él.
+
+###
+# CLI
+###
+
+# kubectl exec -t webserver -- sh -c 'curl -s http://localhost'

@@ -1,0 +1,7 @@
+# Actualiza la imagen del pod para use: httpd:latest
+
+###
+# CLI
+###
+
+# kubectl set image pods webserver webserver=httpd:latest

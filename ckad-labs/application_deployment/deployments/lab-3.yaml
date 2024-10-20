@@ -1,0 +1,8 @@
+# Añade una etiqueta adicional al deployment llamada env=staging.
+
+###
+# CLI
+###
+
+# kubectl label deployments.apps deployment-website env=staging
+# kubectl describe deployments.apps deployment-website

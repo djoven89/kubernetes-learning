@@ -1,0 +1,8 @@
+# Actualiza la imagen del contenedor webserver por httpd:latest y verifica su contenedor ejecutando un curl desde el contenedor cli.
+
+###
+# CLI
+###
+
+# kubectl set image pod/webserver webserver=httpd:latest
+# kubectl exec -ti webserver -c cli -- curl http://localhost

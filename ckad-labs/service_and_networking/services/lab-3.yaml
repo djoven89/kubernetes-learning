@@ -1,0 +1,7 @@
+# Desde el pod http-cli haz una consulta HTTP al deployment deployment-http-site a través del servicio service-http-site.
+
+###
+# CLI
+###
+
+# kubectl exec -ti http-cli -- sh -c 'curl http://service-http-site.default.svc.cluster.local'

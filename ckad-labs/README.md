@@ -216,6 +216,13 @@ A continuación se indican los objetivos con sus laboratorios asociados
 
 ## Services and Networking
 
-* **Demonstrate basic understanding of NetworkPolicies**
-* **Provide and troubleshoot access to applications via services**
-* **Use Ingress rules to expose applications**
+**Demonstrate basic understanding of NetworkPolicies**
+**Provide and troubleshoot access to applications via services**
+
+1. Crea un deployment llamado `deployment-http-site`, cuya imagen sea `learnk8s/app:1.0.0`, tenga 3 réplicas y exponga por el puerto `8080`. Adicionalmente, crea un pod llamado `http-cli` cuya imagen sea `alpine/curl` y el comando sea: `tail -f /dev/null`.
+
+2. Crea un servicio llamado `service-http-site` de tipo `ClusterIP` para el deployment `deployment-http-site` que escuche por el puerto `80`.
+
+3. Desde el pod `http-cli` haz una consulta HTTP al deployment `deployment-http-site` a través del servicio `service-http-site`.
+
+**Use Ingress rules to expose applications**

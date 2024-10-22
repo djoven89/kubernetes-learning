@@ -1,0 +1,10 @@
+# Crea un deployment llamado deployment-http-site, cuya imagen sea learnk8s/app:1.0.0,
+# tenga 3 réplicas y exponga por el puerto 8080. Adicionalmente, crea un pod llamado http-cli
+# cuya imagen sea alpine/curl y el comando sea: tail -f /dev/null.
+
+###
+# CLI
+###
+
+# kubectl create deployment deployment-http-site --image learnk8s/app:1.0.0 --replicas 3 --port 8080
+# kubectl run http-cli --image alpine/curl --command -- tail -f /dev/null

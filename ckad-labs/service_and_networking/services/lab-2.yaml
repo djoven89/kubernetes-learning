@@ -1,0 +1,10 @@
+# Crea un servicio llamado service-http-site de tipo ClusterIP para el deployment deployment-http-site que escuche por el puerto 80.
+
+###
+# CLI
+###
+
+# kubectl describe deployments deployment-http-site
+# kubectl expose deployment deployment-http-site --name service-http-site --type ClusterIP --target-port 8080 --port 80 --selector app=deployment-http-site
+# kubectl get svc -o wide
+# kubectl describe svc service-http-site

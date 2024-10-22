@@ -1,0 +1,19 @@
+# Crea un configMap llamado nginx-http-vhost, el cual debe tener el siguiente contenido:
+#   server {
+#    listen       8080;
+#    server_name  localhost;
+#
+#    location / {
+#        root   /usr/share/nginx/html;
+#        index  index.html index.htm;
+#    }
+#   }
+
+
+###
+# CLI
+###
+
+# kubectl create cm nginx-http-vhost --from-file=/tmp/nginx-http-vhost.conf
+# kubectl get cm
+# kubectl describe cm nginx-http-vhost

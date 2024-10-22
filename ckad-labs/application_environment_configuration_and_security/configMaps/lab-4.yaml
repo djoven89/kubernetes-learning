@@ -1,0 +1,14 @@
+# Actualiza el valor de 8080 a 80 en el configMap nginx-http-port y confirma con curl el cambio.
+
+
+###
+# CLI
+###
+
+# kubectl edit configmaps nginx-http-port
+# (opcional) kubectl patch configmap nginx-http-port --type=json -p='[{"op": "replace", "path": "/data/port", "value": "80"}]'
+# kubectl exec -ti deployment-simple-site-797768f696-nc9bl -- bash -c 'env | grep HTTP_PORT && echo "" && curl http://localhost:$HTTP_PORT'
+
+# kubectl rollout restart deployment deployment-simple-site
+# kubectl exec -ti deployment-simple-site-5cfc7ff74-797w4 -- bash -c 'env | grep HTTP_PORT && echo "" && curl http://localhost:$HTTP_PORT'
+# kubectl exec -ti deployment-simple-site-5cfc7ff74-797w4 -- bash -c 'env | grep HTTP_PORT && echo "" && curl http://localhost:8080'

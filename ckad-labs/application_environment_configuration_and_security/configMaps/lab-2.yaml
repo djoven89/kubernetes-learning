@@ -1,0 +1,10 @@
+# Crea un configMap llamado nginx-http-port, cuyo valor sea: port=8080.
+
+
+###
+# CLI
+###
+
+# kubectl create cm nginx-http-port --from-literal="port=8080"
+# kubectl get cm
+# kubectl describe cm nginx-http-port

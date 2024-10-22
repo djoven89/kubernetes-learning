@@ -1,0 +1,64 @@
+# Crea un deployment con las siguientes requisitos:
+#   Nombre: deployment-simple-site
+#   Imagen: nginx:latest
+#   Réplicas: 2
+#   Puerto a exponer: 8080
+#   configMaps:
+#     Nombre: nginx-http-vhost
+#       Tipo de montaje: volumen
+#       Punto de montaje: /etc/nginx/conf.d/default.conf
+#     Nombre: nginx-http-port
+#       Tipo de montaje: variable
+#       Nombre de la variable: HTTP_PORT
+
+###
+# CLI
+###
+
+# kubectl create deployment deployment-simple-site --image nginx:latest --port 8080 --replicas 2 --dry-run -o yaml
+# kubectl get deployment,pod
+# kubectl exec -ti deployment-simple-site-797768f696-nc9bl -- bash -c 'curl http://localhost:$HTTP_PORT'
+
+###
+# YAML
+###
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: deployment-simple-site
+  name: deployment-simple-site
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: deployment-simple-site
+  template:
+    metadata:
+      labels:
+        app: deployment-simple-site
+    spec:
+      volumes:
+      - name: http-vhost
+        configMap:
+          name: nginx-http-vhost
+          items:
+          - key: nginx-http-vhost.conf
+            path: default.conf
+      containers:
+      - image: nginx:latest
+        name: nginx
+        ports:
+        - containerPort: 8080
+        env:
+        - name: HTTP_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: nginx-http-port
+              key: port
+        volumeMounts:
+        - name: http-vhost
+          mountPath: "/etc/nginx/conf.d/"
+          readOnly: true
+        resources: {}

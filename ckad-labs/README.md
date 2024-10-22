@@ -176,6 +176,39 @@ A continuación se indican los objetivos con sus laboratorios asociados
 3. ResourceQuota
 
 **Understand ConfigMaps**
+
+1. Crea un configMap llamado `nginx-http-vhost`, el cual debe tener el siguiente contenido:
+
+   ```text
+   server {
+    listen       8080;
+    server_name  localhost;
+
+    location / {
+        root   /usr/share/nginx/html;
+        index  index.html index.htm;
+    }
+   }
+   ```
+
+2. Crea un configMap llamado `nginx-http-port`, cuyo valor sea: `port=8080`.
+
+3. Crea un deployment con las siguientes requisitos:
+
+   * **Nombre:** `deployment-simple-site`
+   * **Imagen:** `nginx:latest`
+   * **Réplicas:** `2`
+   * **Puerto a exponer:** `8080`
+   * **configMaps:**
+      * **Nombre:**  `nginx-http-vhost`
+         * **Tipo de montaje:** `volumen`
+         * **Punto de montaje:** `/etc/nginx/conf.d/default.conf`
+      * **Nombre:**  `nginx-http-port`
+         * **Tipo de montaje:** `variable`
+         * **Nombre de la variable:** `HTTP_PORT`
+
+4. Actualiza el valor de `8080` a `80` en el configMap `nginx-http-port` y confirma con `curl` el cambio.
+
 **Define resource requirements**
 **Create & consume Secrets**
 **Understand ServiceAccounts**

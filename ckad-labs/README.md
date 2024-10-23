@@ -211,6 +211,33 @@ A continuación se indican los objetivos con sus laboratorios asociados
 
 **Define resource requirements**
 **Create & consume Secrets**
+
+1. Crea un secret llamado `secret-db-test-conf` que almacene el contenido de un archivo llamado `.env`, cuyo contenido es:
+
+   ```text
+   APP_ROOT_PWD=R00!,2024;
+   APP_DBA_USERNAME=dba_app
+   APP_DBA_PWD=Db@,2024;
+   ```
+
+2. Crea otro secret llamado `secret-db-test-name` que almacene: `APP_DB_NAME=dev_application`.
+
+3. Crea un pod llamado `db-test` cuya imagen sea `mysql:8.0` que exponga el puerto `3306` y que use las siguientes variables obteniendo su valor del secret `secret-db-test-conf` y de `secret-db-test-name`.
+
+   * MYSQL_ROOT_PASSWORD
+   * MYSQL_USER
+   * MYSQL_PASSWORD
+   * MYSQL_DATABASE
+
+4. Crea otro pod llamado `cli-mysql` cuya imagen sea `mysql:8.0`, monta los secrets: `secret-db-test-conf` y `secret-db-test-name` como volúmenes de sólo lectura, conéctate a la base de datos del pod `db-test` usando los secrets montados y crea la base de datos usando los secrets montados e inserta las siguientes sentencias SQL usando los secrets montados.
+
+   ```sql
+   CREATE TABLE cursos (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(50));
+   INSERT INTO cursos (name) VALUES ('CKAD');
+   ```
+
+5. Modifica el valor del secret `secret-db-test-name` por `prod_application` y verifica su valor en ambos pods.
+
 **Understand ServiceAccounts**
 **Understand Application Security (SecurityContexts, Capabilities, etc)**
 

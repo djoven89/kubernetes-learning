@@ -17,6 +17,8 @@ A continuación se indican todos los objetivos y ejercicios con solución propue
 
 ### Define, build and modify container images
 
+* Soluciones en: [application_design_and_build/container_images](https://github.com/djoven89/kubernetes-learning/tree/main/ckad-labs/application_design_and_build/container_images)
+
 1. Crea un pod con los siguientes requisitos:
 
    * **Nombre:** `webserver`
@@ -59,6 +61,8 @@ A continuación se indican todos los objetivos y ejercicios con solución propue
 
 ### Utilize persistent and ephemeral volumes
 
+* Soluciones en: [application_design_and_build/volumes](https://github.com/djoven89/kubernetes-learning/tree/main/ckad-labs/application_design_and_build/volumes)
+
 1. Crea un volumen persistente con los siguientes requisitos en el nodo principal:
 
    * **Nombre:** `pv-hostpath`
@@ -74,11 +78,11 @@ A continuación se indican todos los objetivos y ejercicios con solución propue
 3. Crea un deployment con los siguientes requisitos:
 
    * **Nombre:** `deployment-storage-hostpath`
-   * **Réplicas:** 3
+   * **Réplicas:** `3`
    * **Imagens:** `httpd:latest`
    * **Nombre del persistent volume claim:** `pvc-hostpath`
    * **Nombre del volumen:** `volumen-website`
-   * **Punto de montaje del volumen persistente:** `/usr/local/apache2/htdocs/`
+   * **Punto de montaje del volumen persistente:** `/usr/local/apache2/htdocs`
    * **Nodo:** `principal`
 
 ## Application Deployment
@@ -86,12 +90,13 @@ A continuación se indican todos los objetivos y ejercicios con solución propue
 ### Understand Deployments and how to perform rolling updates
 
 * Vídeo explicativo: https://www.youtube.com/watch?v=6IPu3WU_M0o
+* Soluciones en: [application_deployment/deployments](https://github.com/djoven89/kubernetes-learning/tree/main/ckad-labs/application_deployment/deployments)
 
 1. Crea un deployment con los siguientes requisitos:
 
    * **Nombre:** `deployment-website`
-   * **Réplicas:** 3
-   * **Puerto a exponer:** 8080
+   * **Réplicas:** `3`
+   * **Puerto a exponer:** `8080`
    * **Imagens:** `learnk8s/app:1.0.0`
 
 2. Añade una anotación al deployment para que pueda restaurarse una revisión con más información.
@@ -132,6 +137,7 @@ A continuación se indican todos los objetivos y ejercicios con solución propue
 ### Implement probes and health checks
 
 * Vídeo explicativo: https://www.youtube.com/watch?v=fqfieWP1jY4
+* Soluciones en: [application_observability_and_maintenance/probes_and_health_checks](https://github.com/djoven89/kubernetes-learning/tree/main/ckad-labs/application_observability_and_maintenance/probes_and_health_checks)
 
 1. Crea un pod con un probe de tipo `liveness` con los siguientes requisitos:
 
@@ -190,6 +196,8 @@ A continuación se indican todos los objetivos y ejercicios con solución propue
 
 ### Understand ConfigMaps
 
+* Soluciones en: [application_environment_configuration_and_security/configMaps](https://github.com/djoven89/kubernetes-learning/tree/main/ckad-labs/application_environment_configuration_and_security/configMaps)
+
 1. Crea un configMap llamado `nginx-http-vhost`, el cual debe tener el siguiente contenido:
 
    ```text
@@ -226,6 +234,8 @@ A continuación se indican todos los objetivos y ejercicios con solución propue
 
 ### Create & consume Secrets
 
+* Soluciones en: [application_environment_configuration_and_security/secrets](https://github.com/djoven89/kubernetes-learning/tree/main/ckad-labs/application_environment_configuration_and_security/secrets)
+
 1. Crea un secret llamado `secret-db-test-conf` que almacene el contenido de un archivo llamado `.env`, cuyo contenido es:
 
    ```text
@@ -254,6 +264,8 @@ A continuación se indican todos los objetivos y ejercicios con solución propue
 
 ### Understand ServiceAccounts
 
+* Soluciones en: [application_environment_configuration_and_security/serviceAccounts](https://github.com/djoven89/kubernetes-learning/tree/main/ckad-labs/application_environment_configuration_and_security/serviceAccounts)
+
 1. Crea un serviceAccount llamado `sa-report` para el namespace `lab-sa`.
 
 2. Crea un rol llamado `rol-sa-report` que pueda hacer un `get` y `list` sobre los objetos `pods` del namespace `lab-sa`. Después, aplícalo al serviceAccount `sa-report`.
@@ -271,6 +283,7 @@ A continuación se indican todos los objetivos y ejercicios con solución propue
 ### Provide and troubleshoot access to applications via services
 
 * Vídeo explicativo: https://www.youtube.com/watch?v=RQbc_Yjb9ls
+* Soluciones en: [service_and_networking/services](https://github.com/djoven89/kubernetes-learning/tree/main/ckad-labs/service_and_networking/services)
 
 1. Crea un deployment llamado `deployment-http-site`, cuya imagen sea `learnk8s/app:1.0.0`, tenga 3 réplicas y exponga por el puerto `8080`. Adicionalmente, crea un pod llamado `http-cli` cuya imagen sea `alpine/curl` y el comando sea: `tail -f /dev/null`.
 

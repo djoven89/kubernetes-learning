@@ -5,6 +5,13 @@ A continuación se indican los objetivos con sus laboratorios asociados
 * Enlace al certificado: https://traininglinuxfoundationorg/certification/certified-kubernetes-application-developer-ckad/
 * Versión de Kubernetes: v1.31
 * Número de nodos mínimo para los labs: 2
+* Entorno usado: [Minikube](https://minikube.sigs.k8s.io/docs/) en Ubuntu 20.04
+   * Comandos ejecutados para crear el entorno:
+
+      ```sh
+      minikube start --driver=docker --memory=4g --cpu=3 --disk-size=10g --cni=calico
+      minikube addons enable ingress
+      ```
 
 ## Application Design and Build
 
@@ -45,21 +52,10 @@ A continuación se indican los objetivos con sus laboratorios asociados
 
 **Understand multi-container Pod design patterns (eg sidecar, init and others)**
 
-1. Init Containers
-2. Sidecar Containers
-3. Ephemeral Containers
-
 **Choose and use the right workload resource (Deployment, DaemonSet, CronJob, etc)**
 
 * Vídeo explicativo: https://www.youtube.com/watch?v=4MEgCP7h8UU
 * Vídeo explicativo: https://www.youtube.com/watch?v=30KAInyvY_o
-
-
-1. Deployment
-2. DaemonSet
-3. CronJob
-4. Jobs
-5. StatefulSets
 
 **Utilize persistent and ephemeral volumes**
 
@@ -184,15 +180,12 @@ A continuación se indican los objetivos con sus laboratorios asociados
 ## Application Environment, Configuration and Security
 
 **Discover and use resources that extend Kubernetes (CRD, Operators)**
+
 **Understand authentication, authorization and admission control**
 
 * Vídeo explicativo: https://www.youtube.com/watch?v=iE9Qb8dHqWI
 
 **Understand requests, limits, quotas**
-
-1. Requests and limits
-2. LimitRange
-3. ResourceQuota
 
 **Understand ConfigMaps**
 
@@ -229,6 +222,7 @@ A continuación se indican los objetivos con sus laboratorios asociados
 4. Actualiza el valor de `8080` a `80` en el configMap `nginx-http-port` y confirma con `curl` el cambio.
 
 **Define resource requirements**
+
 **Create & consume Secrets**
 
 1. Crea un secret llamado `secret-db-test-conf` que almacene el contenido de un archivo llamado `.env`, cuyo contenido es:
@@ -272,6 +266,7 @@ A continuación se indican los objetivos con sus laboratorios asociados
 ## Services and Networking
 
 **Demonstrate basic understanding of NetworkPolicies**
+
 **Provide and troubleshoot access to applications via services**
 
 * Vídeo explicativo: https://www.youtube.com/watch?v=RQbc_Yjb9ls

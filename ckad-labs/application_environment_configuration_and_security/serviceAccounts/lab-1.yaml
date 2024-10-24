@@ -1,0 +1,10 @@
+# Crea un serviceAccount llamado sa-report para el namespace lab-sa
+
+###
+# CLI
+###
+
+# kubectl create ns lab-sa
+# kubectl -n lab-sa create serviceaccount sa-report
+# kubectl -n lab-sa get sa
+# kubectl -n lab-sa describe sa sa-report

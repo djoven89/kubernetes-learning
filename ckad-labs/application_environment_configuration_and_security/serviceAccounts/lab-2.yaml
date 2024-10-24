@@ -1,0 +1,11 @@
+# Crea un rol llamado role-sa-report que pueda hacer un get sobre los objetos pods. Después, aplícalo al serviceAccount sa-report.
+
+###
+# CLI
+###
+
+# kubectl -n lab-sa create role role-sa-report --resource=pods --verb=get,list
+# kubectl -n lab-sa create rolebinding role-bind-sa-report --role=role-sa-report --serviceaccount=lab-sa:sa-report
+# kubectl -n lab-sa get role,rolebindings
+# kubectl -n lab-sa describe role role-sa-report
+# kubectl -n lab-sa describe rolebindings role-bind-sa-report

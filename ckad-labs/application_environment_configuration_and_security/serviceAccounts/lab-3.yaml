@@ -1,0 +1,32 @@
+# Crea un pod llamado pod-report cuya imagen sea alpine/curl, que pertenezca al namespace lab-sa y tenga el serviceAccount sa-report.
+
+###
+# CLI
+###
+
+# kubectl -n lab-sa run pod-report --image alpine/curl --dry-run -o yaml --command -- tail -f /dev/null
+# kubectl -n lab-sa get pods
+# kubectl -n lab-sa describe pod pod-report
+
+###
+# YAML
+###
+
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: pod-report
+  name: pod-report
+  namespace: lab-sa
+spec:
+  containers:
+  - command:
+    - tail
+    - -f
+    - /dev/null
+    image: alpine/curl
+    name: pod-report
+    resources: {}
+  restartPolicy: Always
+  serviceAccountName: sa-report

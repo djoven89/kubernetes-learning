@@ -239,6 +239,15 @@ A continuación se indican los objetivos con sus laboratorios asociados
 5. Modifica el valor del secret `secret-db-test-name` por `prod_application` y verifica su valor en ambos pods.
 
 **Understand ServiceAccounts**
+
+1. Crea un serviceAccount llamado `sa-report` para el namespace `lab-sa`.
+
+2. Crea un rol llamado `rol-sa-report` que pueda hacer un `get` y `list` sobre los objetos `pods` del namespace `lab-sa`. Después, aplícalo al serviceAccount `sa-report`.
+
+3. Crea un pod llamado `pod-report` cuya imagen sea `alpine/curl`, que pertenezca al namespace `lab-sa` y tenga el serviceAccount `sa-report`.
+
+4. Haz una consulta al API server solicitando los pods en ejecución en el namespace `lab-sa` y almacena el resultado en un archivo fuera del pod llamado `report.json`.
+
 **Understand Application Security (SecurityContexts, Capabilities, etc)**
 
 ## Services and Networking

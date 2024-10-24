@@ -1,0 +1,8 @@
+# Haz una consulta al API server solicitando los pods en ejecución en el namespace lab-sa y almacena el resultado en un archivo fuera del pod llamado report.json.
+
+###
+# CLI
+###
+
+# kubectl -n lab-sa exec -ti pod-report -- sh -c 'curl -sSk -H "Authorization: Bearer $(cat /var/run/secrets/kubernetes.io/serviceaccount/token)" https://kubernetes.default.svc/api/v1/namespaces/lab-sa/pods'
+# cat report.json | jq -r '.items[].metadata.name'

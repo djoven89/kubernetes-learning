@@ -51,6 +51,10 @@ A continuación se indican los objetivos con sus laboratorios asociados
 
 **Choose and use the right workload resource (Deployment, DaemonSet, CronJob, etc)**
 
+* Vídeo explicativo: https://www.youtube.com/watch?v=4MEgCP7h8UU
+* Vídeo explicativo: https://www.youtube.com/watch?v=30KAInyvY_o
+
+
 1. Deployment
 2. DaemonSet
 3. CronJob
@@ -85,6 +89,8 @@ A continuación se indican los objetivos con sus laboratorios asociados
 
 **Understand Deployments and how to perform rolling updates**
 
+* Vídeo explicativo: https://www.youtube.com/watch?v=6IPu3WU_M0o
+
 1. Crea un deployment con los siguientes requisitos:
 
    * **Nombre:** `deployment-website`
@@ -113,14 +119,22 @@ A continuación se indican los objetivos con sus laboratorios asociados
 9. Elimina el contener `cli` del deployment.
 
 **Use Kubernetes primitives to implement common deployment strategies (eg blue/green or canary)**
+
+* Vídeo explicativo: https://www.youtube.com/watch?v=lxc4EXZOOvE&feature=youtu.be
+* Vídeo explicativo: https://www.youtube.com/watch?v=fWe6k4MmeSg
+
 **Use the Helm package manager to deploy existing packages**
 **Kustomize**
+
+* Vídeo explicativo: https://www.youtube.com/watch?v=LWbbL3jZcgo
 
 ## Application Observability and Maintenance
 
 **Understand API deprecations**
 
 **Implement probes and health checks**
+
+* Vídeo explicativo: https://www.youtube.com/watch?v=fqfieWP1jY4
 
 1. Crea un pod con un probe de tipo `liveness` con los siguientes requisitos:
 
@@ -165,10 +179,15 @@ A continuación se indican los objetivos con sus laboratorios asociados
 
 **Debugging in Kubernetes**
 
+* Vídeo explicativo: https://www.youtube.com/watch?v=hixs2GIGrUw
+
 ## Application Environment, Configuration and Security
 
 **Discover and use resources that extend Kubernetes (CRD, Operators)**
 **Understand authentication, authorization and admission control**
+
+* Vídeo explicativo: https://www.youtube.com/watch?v=iE9Qb8dHqWI
+
 **Understand requests, limits, quotas**
 
 1. Requests and limits
@@ -255,6 +274,8 @@ A continuación se indican los objetivos con sus laboratorios asociados
 **Demonstrate basic understanding of NetworkPolicies**
 **Provide and troubleshoot access to applications via services**
 
+* Vídeo explicativo: https://www.youtube.com/watch?v=RQbc_Yjb9ls
+
 1. Crea un deployment llamado `deployment-http-site`, cuya imagen sea `learnk8s/app:1.0.0`, tenga 3 réplicas y exponga por el puerto `8080`. Adicionalmente, crea un pod llamado `http-cli` cuya imagen sea `alpine/curl` y el comando sea: `tail -f /dev/null`.
 
 2. Crea un servicio llamado `service-http-site` de tipo `ClusterIP` para el deployment `deployment-http-site` que escuche por el puerto `80`.
@@ -262,3 +283,5 @@ A continuación se indican los objetivos con sus laboratorios asociados
 3. Desde el pod `http-cli` haz una consulta HTTP al deployment `deployment-http-site` a través del servicio `service-http-site`.
 
 **Use Ingress rules to expose applications**
+
+* Vídeo explicativo: https://www.youtube.com/watch?v=1BksUVJ1f5M

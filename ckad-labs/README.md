@@ -1,6 +1,6 @@
 # Certificación CKAD
 
-A continuación se indican los objetivos con sus laboratorios asociados
+A continuación se indican todos los objetivos y ejercicios con solución propuestos del examen de certificación CKAD a fecha de 10/2024.
 
 * Enlace al certificado: https://traininglinuxfoundationorg/certification/certified-kubernetes-application-developer-ckad/
 * Versión de Kubernetes: v1.31
@@ -15,7 +15,7 @@ A continuación se indican los objetivos con sus laboratorios asociados
 
 ## Application Design and Build
 
-**Define, build and modify container images**
+### Define, build and modify container images
 
 1. Crea un pod con los siguientes requisitos:
 
@@ -50,14 +50,14 @@ A continuación se indican los objetivos con sus laboratorios asociados
 
 10. Actualiza la imagen del contenedor `webserver` por `httpd:latest` y verifica su contenedor ejecutando un curl desde el contenedor `cli`.
 
-**Understand multi-container Pod design patterns (eg sidecar, init and others)**
+### Understand multi-container Pod design patterns (eg sidecar, init and others)
 
-**Choose and use the right workload resource (Deployment, DaemonSet, CronJob, etc)**
+### Choose and use the right workload resource (Deployment, DaemonSet, CronJob, etc)
 
 * Vídeo explicativo: https://www.youtube.com/watch?v=4MEgCP7h8UU
 * Vídeo explicativo: https://www.youtube.com/watch?v=30KAInyvY_o
 
-**Utilize persistent and ephemeral volumes**
+### Utilize persistent and ephemeral volumes
 
 1. Crea un volumen persistente con los siguientes requisitos en el nodo principal:
 
@@ -83,7 +83,7 @@ A continuación se indican los objetivos con sus laboratorios asociados
 
 ## Application Deployment
 
-**Understand Deployments and how to perform rolling updates**
+### Understand Deployments and how to perform rolling updates
 
 * Vídeo explicativo: https://www.youtube.com/watch?v=6IPu3WU_M0o
 
@@ -114,21 +114,22 @@ A continuación se indican los objetivos con sus laboratorios asociados
 
 9. Elimina el contener `cli` del deployment.
 
-**Use Kubernetes primitives to implement common deployment strategies (eg blue/green or canary)**
+### Use Kubernetes primitives to implement common deployment strategies (eg blue/green or canary)
 
 * Vídeo explicativo: https://www.youtube.com/watch?v=lxc4EXZOOvE&feature=youtu.be
 * Vídeo explicativo: https://www.youtube.com/watch?v=fWe6k4MmeSg
 
-**Use the Helm package manager to deploy existing packages**
-**Kustomize**
+### Use the Helm package manager to deploy existing packages
+
+### Kustomize
 
 * Vídeo explicativo: https://www.youtube.com/watch?v=LWbbL3jZcgo
 
 ## Application Observability and Maintenance
 
-**Understand API deprecations**
+### Understand API deprecations
 
-**Implement probes and health checks**
+### Implement probes and health checks
 
 * Vídeo explicativo: https://www.youtube.com/watch?v=fqfieWP1jY4
 
@@ -169,25 +170,25 @@ A continuación se indican los objetivos con sus laboratorios asociados
    * **Periocidad del los checks:** `10`
    * **Política de restart:** `Always`
 
-**Use built-in CLI tools to monitor Kubernetes applications**
+### Use built-in CLI tools to monitor Kubernetes applications
 
-**Utilize container logs**
+### Utilize container logs
 
-**Debugging in Kubernetes**
+### Debugging in Kubernetes
 
 * Vídeo explicativo: https://www.youtube.com/watch?v=hixs2GIGrUw
 
 ## Application Environment, Configuration and Security
 
-**Discover and use resources that extend Kubernetes (CRD, Operators)**
+### Discover and use resources that extend Kubernetes (CRD, Operators)
 
-**Understand authentication, authorization and admission control**
+### Understand authentication, authorization and admission control
 
 * Vídeo explicativo: https://www.youtube.com/watch?v=iE9Qb8dHqWI
 
-**Understand requests, limits, quotas**
+### Understand requests, limits, quotas
 
-**Understand ConfigMaps**
+### Understand ConfigMaps
 
 1. Crea un configMap llamado `nginx-http-vhost`, el cual debe tener el siguiente contenido:
 
@@ -221,9 +222,9 @@ A continuación se indican los objetivos con sus laboratorios asociados
 
 4. Actualiza el valor de `8080` a `80` en el configMap `nginx-http-port` y confirma con `curl` el cambio.
 
-**Define resource requirements**
+### Define resource requirements
 
-**Create & consume Secrets**
+### Create & consume Secrets
 
 1. Crea un secret llamado `secret-db-test-conf` que almacene el contenido de un archivo llamado `.env`, cuyo contenido es:
 
@@ -251,7 +252,7 @@ A continuación se indican los objetivos con sus laboratorios asociados
 
 5. Modifica el valor del secret `secret-db-test-name` por `prod_application` y verifica su valor en ambos pods.
 
-**Understand ServiceAccounts**
+### Understand ServiceAccounts
 
 1. Crea un serviceAccount llamado `sa-report` para el namespace `lab-sa`.
 
@@ -261,13 +262,13 @@ A continuación se indican los objetivos con sus laboratorios asociados
 
 4. Haz una consulta al API server solicitando los pods en ejecución en el namespace `lab-sa` y almacena el resultado en un archivo fuera del pod llamado `report.json`.
 
-**Understand Application Security (SecurityContexts, Capabilities, etc)**
+### Understand Application Security (SecurityContexts, Capabilities, etc)
 
 ## Services and Networking
 
-**Demonstrate basic understanding of NetworkPolicies**
+### Demonstrate basic understanding of NetworkPolicies
 
-**Provide and troubleshoot access to applications via services**
+### Provide and troubleshoot access to applications via services
 
 * Vídeo explicativo: https://www.youtube.com/watch?v=RQbc_Yjb9ls
 
@@ -277,6 +278,6 @@ A continuación se indican los objetivos con sus laboratorios asociados
 
 3. Desde el pod `http-cli` haz una consulta HTTP al deployment `deployment-http-site` a través del servicio `service-http-site`.
 
-**Use Ingress rules to expose applications**
+### Use Ingress rules to expose applications
 
 * Vídeo explicativo: https://www.youtube.com/watch?v=1BksUVJ1f5M

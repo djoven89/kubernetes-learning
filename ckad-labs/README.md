@@ -2,7 +2,7 @@
 
 A continuación se indican todos los objetivos y ejercicios con solución propuestos del examen de certificación CKAD a fecha de 10/2024.
 
-* Enlace al certificado: https://traininglinuxfoundationorg/certification/certified-kubernetes-application-developer-ckad/
+* Enlace al certificado: https://training.linuxfoundation.org/certification/certified-kubernetes-application-developer-ckad/
 * Versión de Kubernetes: v1.31
 * Número de nodos mínimo para los labs: 2
 * Entorno usado: [Minikube](https://minikube.sigs.k8s.io/docs/) en Ubuntu 20.04
